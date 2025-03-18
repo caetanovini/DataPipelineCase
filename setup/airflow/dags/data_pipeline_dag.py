@@ -6,19 +6,35 @@ import sys
 import os
 
 # Function to execute the Python script (this is where you would run your layer scripts)
-def run_script(script_name):
+def run_script(script_name):  # Add **kwargs to catch Airflow's extra arguments
     try:
         # Get the absolute path to the script
         script_path = os.path.join('data_architecture/codes', script_name)
-
+        
+        # Verifique se o arquivo existe antes de tentar executá-lo
+        if not os.path.exists(script_path):
+            raise FileNotFoundError(f"Script not found: {script_path}")
+        
         # Execute the script using Python
         subprocess.check_call([sys.executable, script_path])  # No need to pass Spark session, it's handled inside the script
         print(f"{script_path} executed successfully.")
     except subprocess.CalledProcessError as e:
         print(f"Error executing {script_name}. Error: {e}")
         raise
+    except FileNotFoundError as e:
+        print(f"Error: {e}")
+        raise
 
-# Define the DAG with appropriate arguments
+def run_bronze_layer():
+    run_script('bronze_layer.py')
+
+def run_silver_layer():
+    run_script('silver_layer.py')
+
+def run_golden_layer():
+    run_script('golden_layer.py')
+
+# Define the DAG
 default_args = {
     'owner': 'airflow',
     'retries': 1,
@@ -29,30 +45,30 @@ dag = DAG(
     'data_pipeline_dag',
     default_args=default_args,
     description='DAG to process bronze, silver, and golden layers',
-    schedule_interval=None,  # Set to 'None' for manual execution
-    start_date=datetime(2025, 3, 16),  # Start date of execution
+    schedule_interval=None,  # Change to None for testing purposes
+    start_date=datetime.now(),
     catchup=False,  # Do not execute past DAG runs
 )
 
-# Task to run the bronze layer (doesn't require spark session)
+# Task to run the bronze layer
 bronze_task = PythonOperator(
     task_id='run_bronze_layer',
-    python_callable=run_script('bronze_layer.py'),
+    python_callable=run_bronze_layer,
     dag=dag,
 )
 
-# Task to run the silver layer (requires spark session)
+# # Task to run the silver layer
 silver_task = PythonOperator(
     task_id='run_silver_layer',
-    python_callable=run_script('silver_layer.py'),
+    python_callable=run_silver_layer,  
     dag=dag,
 )
 
-# Task to run the golden layer (requires spark session)
+# # Task to run the golden layer
 golden_task = PythonOperator(
     task_id='run_golden_layer',
-    python_callable=run_script('golden_layer.py'),
-    dag=dag,
+    python_callable=run_golden_layer, 
+    dag=dag,  # Adicionando o parâmetro dag
 )
 
 # Set task dependencies
