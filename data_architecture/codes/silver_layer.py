@@ -4,7 +4,7 @@ from pyspark.sql.functions import col
 import os
 
 def create_spark_session():
-
+    #JDBC PATH
     jdbc_driver_path = os.path.abspath("libs/sqlite-jdbc-3.36.0.3.jar")
 
     spark = SparkSession.builder \
