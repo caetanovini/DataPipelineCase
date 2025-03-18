@@ -69,14 +69,14 @@ bronze_task = PythonOperator(
     dag=dag,
 )
 
-# Task to run the silver layer (commented out for testing bronze layer only)
+# Task to run the silver layer
 silver_task = PythonOperator(
     task_id='run_silver_layer',
     python_callable=run_silver_layer,  
     dag=dag,
 )
 
-# Task to run the golden layer (commented out for testing bronze layer only)
+# Task to run the golden layer
 golden_task = PythonOperator(
     task_id='run_golden_layer',
     python_callable=run_golden_layer, 
