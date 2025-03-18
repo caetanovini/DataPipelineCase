@@ -3,11 +3,17 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import col
 import os
 
-# Function to parse arguments
-def get_spark_session_from_args():
-    # Example of fetching the spark session passed as an argument
-    # You can also use a different method (e.g., environment variable)
-    spark = SparkSession.builder.getOrCreate()
+def create_spark_session():
+    #JDBC PATH
+    jdbc_driver_path = os.path.abspath("libs/sqlite-jdbc-3.36.0.3.jar")
+
+    spark = SparkSession.builder \
+        .appName("SilverLayerApp") \
+        .config("spark.jars", jdbc_driver_path) \
+        .config("spark.driver.extraClassPath", jdbc_driver_path) \
+        .config("spark.executor.extraClassPath", jdbc_driver_path) \
+        .getOrCreate()
+    
     return spark
 
 def transform_to_silver_layer(spark):
@@ -41,6 +47,5 @@ def transform_to_silver_layer(spark):
         print(f"Error while saving silver layer data: {e}")
 
 if __name__ == "__main__":
-    # Get the spark session
-    spark = get_spark_session_from_args()
+    spark = create_spark_session()
     transform_to_silver_layer(spark)

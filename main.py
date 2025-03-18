@@ -1,5 +1,5 @@
 import libs.install_dependencies as install_dependencies
-from setup.airflow import airflow_setup  # Import the Airflow setup function we created
+from setup.airflow import airflow_setup 
 import os
 import subprocess
 import sys
