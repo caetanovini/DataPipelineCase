@@ -11,7 +11,7 @@ def run_script(script_name):  # Add **kwargs to catch Airflow's extra arguments
         # Get the absolute path to the script
         script_path = os.path.join('data_architecture/codes', script_name)
         
-        # Verifique se o arquivo existe antes de tentar executá-lo
+        # Check if the file exists
         if not os.path.exists(script_path):
             raise FileNotFoundError(f"Script not found: {script_path}")
         
