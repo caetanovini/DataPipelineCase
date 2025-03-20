@@ -49,7 +49,7 @@ If you're using another operating system (such as **Windows** or **Mac**), you'l
 
 The main goal of this project is to run the `main.py` script, which will set up and execute the entire data pipeline. Below is an overview of how the code is structured and how it works.
 
-### 5.1. **`main.py`** - Entry Point
+### 5.1. **`main.py`**
 
 The execution of the pipeline begins with the `main.py` file. This script performs the following tasks:
 
