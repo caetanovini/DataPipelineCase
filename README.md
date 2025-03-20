@@ -2,7 +2,7 @@
 
 ## 1. Objective 🎯
 
-The goal of this project is to build a data pipeline for a brewery dataset following the medallion architecture with three layers: bronze, silver, and gold. 
+The goal of this project is to **build a data pipeline** for a brewery dataset following the **medallion architecture**.
 The solution includes ingesting data from an API, orchestrating the pipeline in Apache Airflow, and transforming the data using PySpark.
 
 ## 2. Data Lake Architecture (Medallion Architecture) 📐
