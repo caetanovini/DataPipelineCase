@@ -47,21 +47,6 @@ If you're using another operating system (such as **Windows** or **Mac**), you'l
 
 ## 5. Code Structure 📂
 
-The main goal of this project is to run the `main.py` script, which will set up and execute the entire data pipeline. Below is an overview of how the code is structured and how it works.
-
-### 5.1. **`main.py`**
-
-The execution of the pipeline begins with the `main.py` file. This script performs the following tasks:
-
-a. **Install Dependencies**: It first ensures that all the necessary dependencies are installed. If they are not already installed, it will use the `install_dependencies.py` script to automatically install the required packages, such as **PySpark**, **Apache Airflow**, and other Python libraries.
-   
-b. **Airflow Environment Setup**: After installing dependencies, it configures the Apache Airflow environment. This includes setting up the necessary configurations, initializing the Airflow database, and ensuring that all Airflow components are ready to run.
-
-c. **Start Airflow Scheduler and Web Server**: The script will also start the **Airflow Scheduler** and **Web Server** to allow you to monitor and manage the execution of tasks.
-
-d. **Execute the DAG**: After setting up Airflow, it will trigger the execution of the **DAG** (Directed Acyclic Graph), which contains the tasks for extracting, transforming, and loading the data.
-
-### 5.2. **Project folder Structure**
 The project is organized into several folders to separate different aspects of the pipeline. Here’s a breakdown of the folder structure:
 
 ```bash
@@ -94,6 +79,17 @@ project_root/
 │   │       └── data_pipeline_dag.py  # DAG to orchestrate the data pipeline
 │
 ```
+
+The main goal of this project is to run the `main.py` script, which will set up and execute the entire data pipeline. Below is an overview of how the code is structured and how it works.
+The execution of the pipeline begins with the `main.py` file. This script performs the following tasks:
+
+a. **Install Dependencies**: It first ensures that all the necessary dependencies are installed. If they are not already installed, it will use the `install_dependencies.py` script to automatically install the required packages, such as **PySpark**, **Apache Airflow**, and other Python libraries.
+   
+b. **Airflow Environment Setup**: After installing dependencies, it configures the Apache Airflow environment. This includes setting up the necessary configurations, initializing the Airflow database, and ensuring that all Airflow components are ready to run.
+
+c. **Start Airflow Scheduler and Web Server**: The script will also start the **Airflow Scheduler** and **Web Server** to allow you to monitor and manage the execution of tasks.
+
+d. **Execute the DAG**: After setting up Airflow, it will trigger the execution of the **DAG** (Directed Acyclic Graph), which contains the tasks for extracting, transforming, and loading the data.
 ## 6. How to Build the Environment and Run the Code 🛠️
 
 ### a. Create a Virtual Environment 🐍
