@@ -9,15 +9,15 @@ The solution includes ingesting data from an API, orchestrating the pipeline in 
 
 The data lake architecture follows the **Medallion Architecture** model, which consists of three layers:
 
-###**Bronze Layer** 🥉
+### **Bronze Layer** 🥉
 In this layer, raw data is extracted from the API in its original format (JSON) and no transformations are applied in this layer.
 
-###**Silver Layer** 🥈
+### **Silver Layer** 🥈
 In the Silver layer, the raw data is transformed into a **Parquet** columnar storage format. This transformation includes:
 - Converting raw data into structured columns for better querying and analysis.
 - Partitioning the data by brewery state **location**.
 
-###**Gold Layer** 🥇
+### **Gold Layer** 🥇
 In the Gold layer, the data is aggregated, cleaned, and prepared for analysis. 
 The data that was stored in **Parquet** format in the Silver layer is now read, aggregated, and stored in a **SQLite** relational database. This enables efficient querying and analysis of the data.
 The transformation includes:
