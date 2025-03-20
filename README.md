@@ -107,7 +107,7 @@ Once the environment is created, activate it with:
 conda activate data_pipeline_case
 ```
 
-#### .If you're NOT using Anaconda:
+#### If you're NOT using Anaconda:
 If you're not using Anaconda, you can create a virtual environment using venv (included by default in Python 3.3 and later) or virtualenv (if installed).
 Make sure you specify *Python 3.9* while creating the environment:
 
